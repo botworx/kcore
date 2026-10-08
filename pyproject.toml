@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kcore"
+dynamic = ["version"]
+description = 'Knowledge core'
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "kfields", email = "kurtisfields@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "loguru"
+]
+
+[project.urls]
+Documentation = "https://github.com/kfields/kcore#readme"
+Issues = "https://github.com/kfields/kcore/issues"
+Source = "https://github.com/kfields/kcore"
+
+[tool.hatch.version]
+path = "kcore/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:kcore tests}"
+
+[tool.coverage.run]
+source_pkgs = ["kcore", "tests"]
+branch = true
+parallel = true
+omit = [
+  "kcore/__about__.py",
+]
+
+[tool.coverage.paths]
+kcore = ["kcore", "*/kcore/kcore"]
+tests = ["tests", "*/kcore/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
